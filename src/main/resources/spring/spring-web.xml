@@ -42,6 +42,7 @@
                     <list>
                         <value>login</value>
                         <value>checkLogin</value>
+                        <value>regist</value>
                     </list>
                 </property>
             </bean>
