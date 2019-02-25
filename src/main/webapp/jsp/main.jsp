@@ -15,7 +15,11 @@
 this is success page!
 
 <a href="${pageContext.request.contextPath}/anotherpage">点我跳到另一个页面</a>
-
+<a href="/file">上传</a>
+<form action="/file/download" method="post">
+    <input type="text" id="filename" name="filename"/>
+    <input type="submit" value="下载">
+</form>
 <form action="${pageContext.request.contextPath}/outLogin">
     <table>
         <tr>

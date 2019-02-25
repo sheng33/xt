@@ -21,12 +21,31 @@
   </properties>
 
   <dependencies>
+    <!--文件上传-->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId> commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId> commons-fileupload</artifactId>
+      <version>1.2.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!--测试-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <!--数据库-->
     <dependency>
       <groupId>commons-dbcp</groupId>
       <artifactId>commons-dbcp</artifactId>

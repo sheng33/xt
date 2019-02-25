@@ -9,9 +9,10 @@
 <body >
 
 <form action="${pageContext.request.contextPath}/checkLogin" method="post">
+
     <table>
         <tr>
-            <td style="font-size:5em">a用户名:</td>
+            <td>a用户名:</td>
             <td><input id="username" name="username" type="text"></td>
         </tr>
         <tr>

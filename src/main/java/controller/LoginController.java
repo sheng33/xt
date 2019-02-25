@@ -22,6 +22,9 @@ public class LoginController {
     public String login(){
         return "login";
     }
+    //跳转到上传页面
+    @RequestMapping("file")
+    public String uploadfile(){ return "fileupload";}
     //任意跳转页面
     @RequestMapping("/anotherpage")
     public String hrefpage(){
@@ -46,7 +49,6 @@ public class LoginController {
     //处理用户请求的handleRequest方法
     @RequestMapping("/checkLogin")
     public String checkLogin(User user, Model model,HttpSession Session) throws  Exception{
-        System.out.println("a");
         user = userService.checkLogin(user.getUsername(),user.getPassword(),Session);
         if(user != null){
             model.addAttribute("role",user.getRole());
