@@ -6,6 +6,16 @@ public class UserFile {
     private String filename;
     private String filesrc;
     private String newfilename;
+    private Integer role;
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
     public UserFile(){}
     public String getNewfilename() {
         return newfilename;

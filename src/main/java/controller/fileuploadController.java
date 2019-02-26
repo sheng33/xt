@@ -1,5 +1,6 @@
 package controller;
 
+import dao.User;
 import dao.UserFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +13,13 @@ import service.UploadService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,7 +31,8 @@ public class fileuploadController {
     @Autowired
     private UploadService uploadService;
     @RequestMapping("/fileupload")
-    public @ResponseBody String upload(MultipartFile file, HttpServletRequest request,UserFile userFile) throws IOException{
+    public @ResponseBody String upload(MultipartFile file, HttpServletRequest request, UserFile userFile, HttpSession session) throws IOException{
+        User user = (User)session.getAttribute("user");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSS");
         String src =simpleDateFormat.format(new Date());
 
@@ -62,19 +66,25 @@ public class fileuploadController {
         userFile.setFilesrc(newFile.getPath());
         userFile.setNewfilename(newFileName);
 
-        uploadService.SaveFileName(userFile);
+        uploadService.SaveFileName(userFile,user);
 
         return  fileUrl;
     }
 
     @RequestMapping("/download")
-    public void CheckFile(HttpServletResponse response,UserFile userFile)throws IOException{
+    public void CheckFile(HttpServletResponse response, UserFile userFile,HttpServletRequest request)throws IOException{
         //得到要下载的文件
-        userFile = uploadService.CheckFile(userFile.getFilename());
+        HttpSession session = request.getSession();
+        System.out.println("session:"+session);
+        User user = (User)session.getAttribute("user");
+        System.out.println("user:"+user);
+        System.out.println(user.getRole());
+        System.out.println(userFile.getFilename());
+        userFile = uploadService.CheckFile(userFile.getFilename(),user.getRole());
         System.out.println(userFile.getFilename());
 
         String filename = userFile.getFilename();
-        filename = URLEncoder.encode(filename,"UTF-8");
+        filename = URLEncoder.encode(filename, StandardCharsets.UTF_8);
         if(userFile!=null){
             String Path = userFile.getFilesrc();
             System.out.println(Path);
@@ -96,8 +106,9 @@ public class fileuploadController {
             FileInputStream in = new FileInputStream(Path);
             // 创建输出流
             OutputStream out = response.getOutputStream();
+
             // 创建缓冲区
-            byte buffer[] = new byte[1024]; // 缓冲区的大小设置是个迷  我也没搞明白
+            byte[] buffer = new byte[1024]; // 缓冲区的大小设置是个迷  我也没搞明白
             int len = 0;
             //循环将输入流中的内容读取到缓冲区当中
             while((len = in.read(buffer)) > 0){

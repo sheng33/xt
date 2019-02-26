@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class LoginInterptor implements HandlerInterceptor {
@@ -31,8 +32,11 @@ public class LoginInterptor implements HandlerInterceptor {
             System.out.println(url.endsWith(temp));
         }
         System.out.println("allow:"+allowedPass);
-        System.out.println("aaaa");
-        response.sendRedirect(request.getContextPath()+"login");
+
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.println ("<script language=javascript>alert('当前未登陆，请先登录');window.location='index.jsp'</script>");
+
         return false;
     }
 

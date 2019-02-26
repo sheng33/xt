@@ -15,7 +15,7 @@
     </select>
     <insert id="registerByUsernameAndPassword">
         insert into T_USER (username,password,role)
-          values (#{username},#{password},"普通用户")
+          values (#{username},#{password},1)
     </insert>
 
 </mapper>

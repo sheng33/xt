@@ -15,7 +15,12 @@
 this is success page!
 
 <a href="${pageContext.request.contextPath}/anotherpage">点我跳到另一个页面</a>
-<a href="/file">上传</a>
+<form action="/file/fileupload" method="post" enctype="multipart/form-data">
+    <label>文件上传</label>
+    <input type="file" name="file">
+    <input type="submit" value="上传">
+</form>
+
 <form action="/file/download" method="post">
     <input type="text" id="filename" name="filename"/>
     <input type="submit" value="下载">
@@ -27,5 +32,9 @@ this is success page!
         </tr>
     </table>
 </form>
+
+</div>
+
+<iframe src="/file" width="100%" height="50%"/>
 </body>
 </html>

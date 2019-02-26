@@ -4,17 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserFileDao">
     <!-- 目的：为DAO接口方法提供sql语句配置 -->
-    <resultMap type="dao.UserFileDao" id="userFileMap">
-        <id property="id" column="id" />
+    <resultMap type="dao.UserFile" id="userFileMap">
+        <id property="ID" column="id" />
         <result property="filename" column="filename" />
         <result property="filesrc" column="filesrc" />
         <result property="newfilename" column="newfilename" />
+        <result property="role" column="role"/>
     </resultMap>
     <insert id="savefile" parameterType="dao.UserFile">
-        insert into upload(id,filename,filesrc,newfilename)
-          values (null,#{filename},#{filesrc},#{newfilename})
+        insert into upload(id,filename,filesrc,newfilename,role)
+          values (null,#{filename},#{filesrc},#{newfilename},#{role})
     </insert>
-    <select id="findfileSrc" parameterType="String" resultMap="userFileMap">
-        select * from upload where filename  = #{filename}
+    <select id="findfileSrc" parameterType="dao.UserFile" resultMap="userFileMap">
+        select * from upload where filename  = #{filename} and role = #{role} or role = 1;
+    </select>
+    <select id="showfilelist" resultType="dao.UserFile">
+        select id,filename from upload where role = #{role} or role = 1
     </select>
 </mapper>
