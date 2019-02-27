@@ -12,7 +12,7 @@
 <div>
     <strong> welcome,${role}${sessionScope.user.username}! </strong>
 </div>
-this is success page!
+<a href="/person">个人中心</a>
 
 <a href="${pageContext.request.contextPath}/anotherpage">点我跳到另一个页面</a>
 <form action="/file/fileupload" method="post" enctype="multipart/form-data">
@@ -33,7 +33,7 @@ this is success page!
     </table>
 </form>
 
-</div>
+
 
 <iframe src="/file" width="100%" height="50%"/>
 </body>

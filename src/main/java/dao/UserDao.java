@@ -9,4 +9,5 @@ public interface UserDao {
      */
     void registerByUsernameAndPassword(@Param("username")String username,
                                        @Param("password")String password);
+
 }

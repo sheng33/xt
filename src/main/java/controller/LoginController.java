@@ -22,6 +22,8 @@ public class LoginController {
     private UserService userService;
     @Autowired
     private UploadService uploadService;
+
+    private User users;
     //登录界面
     @RequestMapping("/login")
     public String login(){
@@ -35,6 +37,12 @@ public class LoginController {
         model.addAttribute("fileRole",user.getRole());
         model.addAttribute("fileList",fileList);
         return "fileupload";
+    }
+    //个人信息界面
+    @RequestMapping("/person")
+    public String person(Model model){
+        model.addAttribute("lgn",users.getUsername());
+        return "person";
     }
     //任意跳转页面
     @RequestMapping("/anotherpage")
@@ -54,13 +62,13 @@ public class LoginController {
     @RequestMapping("doRegist")
     public String doRegist(User user, Model model){
         userService.Regist(user);
-        System.out.println(user.getUsername());
         return "main";
     }
     //处理用户请求的handleRequest方法
     @RequestMapping("/checkLogin")
     public String checkLogin(User user, Model model, HttpSession Session) throws  Exception{
         user = userService.checkLogin(user.getUsername(),user.getPassword(),Session);
+        users = user;
         if(user != null){
             model.addAttribute("role",user.getRole());
             model.addAttribute("lgn",user.getUsername());
