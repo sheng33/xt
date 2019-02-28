@@ -1,14 +1,12 @@
 package controller;
 
 
-import dao.User;
-import dao.UserFile;
-import interceptor.LoginInterptor;
+import pojo.User;
+import pojo.UserFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import service.UploadService;
 import service.UserService;
 
@@ -53,7 +51,7 @@ public class LoginController {
     @RequestMapping("outLogin")
     public String outLogin(HttpSession session){
         session.invalidate();
-        return "login";
+        return "../index";
     }
     @RequestMapping("/regist")
     public String regist(){
@@ -65,7 +63,7 @@ public class LoginController {
         return "main";
     }
     //处理用户请求的handleRequest方法
-    @RequestMapping("/checkLogin")
+    @RequestMapping("/main")
     public String checkLogin(User user, Model model, HttpSession Session) throws  Exception{
         user = userService.checkLogin(user.getUsername(),user.getPassword(),Session);
         users = user;
@@ -80,7 +78,8 @@ public class LoginController {
 
     @RequestMapping("selectAll")
     public String selectAll(Model model,User user){
-        List<UserFile> fileList = uploadService.ShowList(user.getRole());
+        System.out.println(users.getRole()+"ssadsa");
+        List<UserFile> fileList = uploadService.ShowList(users.getRole());
         model.addAttribute("filelist",fileList);
         return "/showAllfile";
     }

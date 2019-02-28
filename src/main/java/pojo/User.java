@@ -1,4 +1,4 @@
-package dao;
+package pojo;
 
 public class User {
     private Integer id;//用户ID

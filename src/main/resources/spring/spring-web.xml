@@ -47,7 +47,7 @@
                 <property name="allowedPass">
                     <list>
                         <value>login</value>
-                        <value>checkLogin</value>
+                        <value>main</value>
                         <value>regist</value>
                     </list>
                 </property>
