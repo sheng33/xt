@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Sheng
@@ -10,11 +11,28 @@
 <head>
     <title>file upload</title>
 </head>
-<body>
-    <form action="/file/fileupload" method="post" enctype="multipart/form-data">
-        <label>文件上传</label>
-        <input type="file" name="file">
-        <input type="submit" value="上传">
-    </form>
+<body style="width: 100%; height: 100%;">
+
+    <div align="center">
+        <table border="1">
+            <tr>
+                <td>id</td>
+                <td>文件名称</td>
+                <td>权限${fileRole}</td>
+            </tr>
+            <tbody>
+            <c:forEach var="userFile" items="${fileList}">
+                <tr>
+                    <th>${userFile.ID}</th>
+                    <th>
+                        <a href="/file/download?filename=${userFile.filename}"  target="_blank">
+                                ${userFile.filename}
+                        </a>
+                    </th>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
