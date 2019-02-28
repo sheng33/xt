@@ -5,7 +5,7 @@
 <mapper namespace="dao.UserDao">
     <!-- 目的：为DAO接口方法提供sql语句配置 -->
     <!-- 查询用户和密码进行登录 -->
-    <resultMap type="dao.User" id="userMap">
+    <resultMap type="pojo.User" id="userMap">
         <id property="id" column="id" />
         <result property="username" column="username" />
         <result property="password" column="password" />

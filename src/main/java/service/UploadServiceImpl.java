@@ -1,7 +1,7 @@
 package service;
 
-import dao.User;
-import dao.UserFile;
+import pojo.User;
+import pojo.UserFile;
 import dao.UserFileDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

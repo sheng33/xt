@@ -9,10 +9,9 @@
         <tr>
             <td>id</td>
             <td>文件名称</td>
-            <td>权限${fileRole}</td>
         </tr>
         <tbody>
-        <c:forEach var="userFile" items="${fileList}">
+        <c:forEach var="userFile" items="${filelist}">
             <tr>
                 <th>${userFile.ID}</th>
                 <th>
